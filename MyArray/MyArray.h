@@ -29,7 +29,7 @@ struct myarray {
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
 /* 初始化：elem_size 必须 > 0 */
-void myarray_init(struct myarray *a, size_t elem_size);
+int myarray_init(struct myarray *a, size_t elem_size);
 
 /* 释放堆内存，并把描述符复位 */
 void myarray_free(struct myarray *a);

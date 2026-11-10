@@ -26,24 +26,50 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <assert.h>
 #include "MyArray.h"
 
 /* 建议把扩容逻辑抽成一个 static 函数，push 和 insert 共用 */
-
-void myarray_init(struct myarray *a, size_t elem_size)
+#define MYARRAR_INIT_CAP 8;
+int myarray_init(struct myarray *a, size_t elem_size)
 {
-	/* TODO */
+    if (a == NULL || elem_size == 0) {
+        return -1;
+    }
+
+    a->data = NULL;
+    a->elem_size = elem_size;
+    a->len = 0;
+    a->cap = 0;
+    return 0;
 }
 
 void myarray_free(struct myarray *a)
 {
-	/* TODO: 注意 free(NULL) 是安全的，但别留下野指针 */
+	free(a->data);
+	a->data = NULL;
+	a->len = 0;
+	a->cap = 0;
 }
 
 int myarray_reserve(struct myarray *a, size_t need)
 {
-	/* TODO */
+    if (a == NULL || a->elem_size == 0) {
+        return -1;
+    }
+    if (need <= a->cap) {
+        return 0;
+    }
+    if (need > SIZE_MAX / a->elem_size) {
+        return -1;
+    }
+    size_t bytes = need * a->elem_size;
+    void *p = realloc(a->data, bytes);
+    if (p == NULL) {
+        return -1;
+    }
+    a->data = p;
+    a->cap = need;
 	return 0;
 }
 
