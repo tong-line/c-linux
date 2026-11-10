@@ -1,0 +1,16 @@
+# ---- 编译产物 ----
+*.o
+*.a
+*.so
+*.dylib
+*.dSYM/
+a.out
+
+# ---- 就地编译出的可执行文件 ----
+/MyArray/test
+
+# ---- 编辑器 / 系统 ----
+.DS_Store
+.vscode/
+.idea/
+*.swp
