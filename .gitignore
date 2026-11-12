@@ -14,3 +14,7 @@ a.out
 .vscode/
 .idea/
 *.swp
+
+# ---- 构建目录 / clangd 数据库 ----
+/build/
+compile_commands.json
